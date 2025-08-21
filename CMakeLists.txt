@@ -215,14 +215,9 @@ if(NGEN_WITH_EXTERN_SLOTH)
     set_target_properties(slothmodel PROPERTIES CXX_VISIBILITY_PRESET default)
 endif()
 
-if (NGEN_WITH_EXTERN_SMP OR NGEN_WITH_EXTERN_SFT)
-    # SoilMoistureProfiles and SoilFreezeThaw expect this setting,
-    # as they have alternative standalone build modes.
-    set(NGEN ON CACHE BOOL "Type setting for SMP and SFT")
-endif()
-
 if(NGEN_WITH_EXTERN_SMP)
     # SoilMoistureProfiles
+	set(NGEN ON CACHE BOOL "Enable BMI for SMP")
     add_external_subdirectory(
         SOURCE     "${NGEN_EXT_DIR}/SoilMoistureProfiles/SoilMoistureProfiles"
         OUTPUT     "${NGEN_EXT_DIR}/SoilMoistureProfiles/cmake_build"
@@ -233,6 +228,7 @@ endif()
 
 if(NGEN_WITH_EXTERN_SFT)
     # SoilFreezeThaw
+	set(NGEN ON CACHE BOOL "Enable BMI for SFT")
     add_external_subdirectory(
         SOURCE     "${NGEN_EXT_DIR}/SoilFreezeThaw/SoilFreezeThaw"
         OUTPUT     "${NGEN_EXT_DIR}/SoilFreezeThaw/cmake_build"
@@ -464,6 +460,8 @@ ngen_multiline_message(
 "  Extern Models:"
 "    NGEN_WITH_EXTERN_ALL: ${NGEN_WITH_EXTERN_ALL}"
 "    NGEN_WITH_EXTERN_SLOTH: ${NGEN_WITH_EXTERN_SLOTH}"
+"	 NGEN_WITH_EXTERN_SMP: ${NGEN_WITH_EXTERN_SMP}"
+"	 NGEN_WITH_EXTERN_SMP: ${NGEN_WITH_EXTERN_SFT}"
 "    NGEN_WITH_EXTERN_TOPMODEL: ${NGEN_WITH_EXTERN_TOPMODEL}"
 "    NGEN_WITH_EXTERN_CFE: ${NGEN_WITH_EXTERN_CFE}"
 "    NGEN_WITH_EXTERN_PET: ${NGEN_WITH_EXTERN_PET}"
